@@ -1,9 +1,8 @@
 # OptiExtract Internship Assignment: File Uploader and Tracker
 
----
 
 
-## 1. Local Setup Guide
+# 1. Local Setup Guide
 
 ### **Prerequisites**
 Before you begin, ensure you have the following installed on your system:
@@ -14,8 +13,8 @@ Before you begin, ensure you have the following installed on your system:
 
 #### **Step 1: Clone the Repository**
 ```bash
-git clone [temp]
-cd temp
+git clone https://github.com/B4K2/OptiExtract_task.git
+cd OptiExtract_task
 ```
 
 #### **Step 2:Database Setup(PostgreSQL)**
