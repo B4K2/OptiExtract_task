@@ -1,0 +1,94 @@
+/* --- GENERAL LAYOUT & SHARED STYLES --- */
+.app-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+.app-container > canvas {
+  position: absolute !important;
+  top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+.content {
+  position: relative; z-index: 2; display: flex; align-items: center; justify-content: center;
+  height: 100%; padding: 1rem;
+}
+
+/* --- UPLOADER PAGE STYLES --- */
+.uploader-content {
+  display: flex; flex-direction: column; align-items: center; gap: 1.25rem;
+  padding: 2.5rem 2rem; text-align: center; color: #f0f0f0;
+}
+.main-title { font-size: 1.8rem; font-weight: 600; margin-bottom: 0.5rem; }
+.subtitle { margin: 0; font-size: 0.9rem; color: #c0c0c0; }
+.file-input-hidden { width: 0.1px; height: 0.1px; opacity: 0; overflow: hidden; position: absolute; z-index: -1; }
+.file-input-label {
+  font-weight: bold; color: #fff; background-color: #ffffff22; border: 1px solid #ffffff44;
+  border-radius: 8px; padding: 0.6rem 1.5rem; cursor: pointer; transition: background-color 0.2s ease-in-out;
+}
+.file-input-label:hover { background-color: #ffffff33; }
+.upload-button {
+  font-size: 1rem; font-weight: 600; color: white; background: linear-gradient(135deg, rgba(121, 94, 255, 0.6) 0%, rgba(10, 203, 222, 0.6) 100%);
+  border: none; border-radius: 12px; padding: 0.8rem 1.8rem; cursor: pointer; transition: all 0.2s ease-in-out; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.upload-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); }
+.upload-button:disabled { opacity: 0.5; cursor: not-allowed; transform: translateY(0); }
+.loader { border: 3px solid #f3f3f333; border-top: 3px solid #e0e0e0; border-radius: 50%; width: 18px; height: 18px; animation: spin 1s linear infinite; margin: 0 auto; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.status-message { margin-top: 0.5rem; font-size: 0.9rem; font-weight: 500; color: #e0e0e0; word-break: break-word; max-width: 100%; transition: color 0.3s ease; }
+.status-message.success { color: #4CAF50; }
+.status-message.error { color: #F44336; }
+
+/* --- HISTORY PAGE STYLES --- */
+.history-content { color: #f0f0f0; padding: 2.5rem; width: 100%; }
+.history-content h2 { text-align: center; font-size: 1.8rem; margin-top: 0; }
+.nav-link { display: block; text-align: center; margin-bottom: 2rem; color: #9facff; text-decoration: none; font-weight: 500; }
+.error-message { color: #F44336; text-align: center; }
+.table-container { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px 15px; text-align: left; }
+thead tr { background-color: #ffffff1a; }
+th { font-weight: 600; }
+tbody tr { border-bottom: 1px solid #ffffff1a; }
+tbody tr:last-of-type { border-bottom: none; }
+td[data-label="Filename"] { word-break: break-all; }
+
+/* --- NAVIGATION LINK (BOTTOM) --- */
+.page-nav { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 10; }
+.page-nav a { color: #c0c0c0; text-decoration: none; font-weight: 500; background: #00000033; padding: 8px 16px; border-radius: 12px; transition: background 0.2s ease; }
+.page-nav a:hover { background: #00000055; }
+
+/* 
+============================================
+--- NEW STYLES FOR SCROLLING & RESPONSIVENESS ---
+============================================
+*/
+
+/* On the history page, allow the content area to scroll vertically */
+.is-history-page .content {
+  overflow-y: auto;
+  align-items: flex-start; /* Align content to the top */
+  padding-top: 4rem; /* Add some space at the top */
+  padding-bottom: 6rem; /* Add space at the bottom */
+}
+
+@media screen and (max-width: 600px) {
+  .content { padding: 0.5rem; }
+  .uploader-content, .history-content { padding: 1.5rem 1rem; }
+  .main-title, .history-content h2 { font-size: 1.5rem; }
+
+  /* Responsive Table Trick */
+  table thead { display: none; }
+  table tr { display: block; margin-bottom: 1rem; border: 1px solid #ffffff2a; border-radius: 8px; padding: 0.5rem; }
+  table tr:has(td[colspan="3"]) { display: table-row; border: none; }
+  table td[colspan="3"] { display: table-cell; text-align: center; }
+  table td { display: block; text-align: right; border-bottom: none; padding-top: 8px; padding-bottom: 8px; word-wrap: break-word; }
+  table td::before { content: attr(data-label); float: left; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; }
+
+  /* Specific fix for history page scrolling on mobile */
+  .is-history-page .content {
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+  }
+}
